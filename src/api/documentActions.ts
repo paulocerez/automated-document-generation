@@ -6,7 +6,7 @@ import * as pd_api from 'pandadoc-node-client';
 export async function createAndSendDocument(): Promise<string> {
   const apiInstance = getApiInstance();
   const documentCreateRequest: pd_api.DocumentCreateRequest = {
-      name: 'Your Document Name',
+    name: 'Your Document Name',
     templateUuid: process.env.TEMPLATE_ID,
     recipients: [
       {
@@ -25,8 +25,13 @@ export async function createAndSendDocument(): Promise<string> {
   const createdDocument = await apiInstance.createDocument({ documentCreateRequest });
   console.log('Document created with ID:', createdDocument.id);
 
-  await sendDocument(createdDocument.id);
-  return createdDocument.id;
+  if (createdDocument.id) {
+    await sendDocument(createdDocument.id);
+    return createdDocument.id
+  } else {
+    console.error('Failed to create document');
+    throw new Error('Failed to create document: No document ID returned');
+  }
 }
 
 export async function sendDocument(documentId: string): Promise<void> {
