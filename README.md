@@ -1,0 +1,1 @@
+This repo utilizes the PandaDoc API to automatically create, send, and download (if signature.status === complete) a PDF file based on a template created in the PandaDoc interface. Written in TypeScript.
