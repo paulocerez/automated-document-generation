@@ -13,7 +13,7 @@ export async function pollDocumentStatus(documentId: string): Promise<void> {
     await new Promise(resolve => setTimeout(resolve, 10000)); // 10 seconds delay before next status check
     const documentDetails = await apiInstance.getDocument({ id: documentId });
     status = documentDetails.status;
-    console.log('Current document status:', status);
+    console.log('Current document status: ', status);
     attempts++;
   }
 
